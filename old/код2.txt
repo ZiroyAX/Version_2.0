@@ -1,0 +1,376 @@
+/******************************************************************************
+
+                            Online C# Compiler.
+                Code, Compile, Run and Debug C# program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+
+/******************************************************************************
+
+                            Online C# Compiler.
+                Code, Compile, Run and Debug C# program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace test_1
+{
+    public class Program
+    {
+
+        public static bool checkNum (string str)
+        {
+            int n;
+            bool check = int.TryParse(str, out n);
+
+            if (check)
+            {
+                return true;
+            } else return false;
+        }
+
+
+        
+        
+ ////////////////////////////Задание 1       
+        public static int[] sortArr ()
+        {
+
+            int tmp = 0;
+            int tmp2 = 0;
+            int tmp3 = 0;
+
+            long maxValue = -9223372036854775808;
+            long minValue = 9223372036854775807;
+
+            char[] gg = {' ', ',', ':', ';' };
+            int[] ar;
+            int temp_counter = 0;
+            int temp_counter_exit = 0;
+
+            Console.WriteLine("Введите массив чисел через пробел");            
+            do
+            {
+                temp_counter = 0;
+                string str = Console.ReadLine();
+
+                string[] strArr = str.Split(gg, StringSplitOptions.RemoveEmptyEntries);
+                temp_counter_exit = strArr.Length;
+                
+                //Проверка на число
+                foreach (string e in strArr)
+                {
+                    if (checkNum(e))
+                    {
+                        temp_counter++;
+                    }
+                }
+
+            //Console.WriteLine(temp_counter + " " + strArr.Length);
+            
+            //Копирование массива с преобразованием типа
+            if (temp_counter == temp_counter_exit)
+            {
+                ar = new int[strArr.Length];
+                for (int i = 0; i < strArr.Length; i++)
+                {
+                    ar[i] = int.Parse(strArr[i]);
+                    //Console.WriteLine("ar[i]= " + ar[i] + " " + "strArr[i]= " + strArr[i]);
+
+
+                }
+
+
+
+                //Сортировка
+                for (int s = 0; s < ar.Length; s++)
+                {
+
+                    for (int j = 1; j < ar.Length; j++)
+                    {
+                        tmp = ar[j - 1];
+                        tmp2 = ar[j];
+
+                        if (tmp > maxValue)
+                        {
+                            maxValue = tmp;
+                        };
+                        if (tmp < minValue)
+                        {
+                            minValue = tmp;
+                        };
+
+                        if (tmp > tmp2)
+                        {
+                            tmp3 = tmp2;
+                            ar[j] = tmp;
+                            ar[j - 1] = tmp3;
+                        }
+
+                    }
+
+                }
+/*
+                for (int i = 0; i < ar.Length; i++)
+                {
+                        Console.WriteLine("i= " + i + " - " + ar[i]);
+                }
+*/
+                Console.WriteLine("Минимальное значение= " + minValue);
+                Console.WriteLine("Максимальное значение= " + maxValue);
+
+
+                return ar;
+
+            }
+            else Console.WriteLine("Введите, пожалуйста, целые числа не превышающие максимальный размер типа int: +-2 147 483 647");
+
+            } while (temp_counter != temp_counter_exit);                
+
+
+            int[] end = {0};
+            return end;
+        }
+        
+        
+        
+        
+        ////////////////////////////////////////////////////Задание 2
+        
+        public static int Search_ver1 (int[] h)
+        {
+            Console.WriteLine("Введите число, которое хотите найти:");
+            int searc;
+            string string_searc;
+            
+            do {
+                string_searc = Console.ReadLine();
+                if (checkNum(string_searc))
+                {
+                    searc = int.Parse(string_searc);
+                    for (int i = 0; i < h.Length; i++)
+                        {
+                            if (searc == h[i])
+                             {
+                                 //Console.WriteLine("Найден под индексом: " + i);
+                                 return i;
+                             }
+                        }
+                    
+                } else Console.WriteLine("Введите, пожалуйста, целое число");
+                
+                
+                
+            } while (checkNum(string_searc) != true);
+
+            return 12345004;
+        }
+        
+
+
+
+        
+        
+        ////////////////////////////////////////////////////////////////Задание 4
+
+        public static long Factorial_ver1 (int n)
+        {
+
+
+            //int n = int.Parse(Console.ReadLine());
+
+
+
+            int[] counter_n = new int[n];
+            long counter_all = 1;
+
+            for (int i = 0; i < n; i++)
+            {
+                counter_n[i] = i + 1;
+                //Console.WriteLine("i= " + i + " " + counter_n[i]);
+            }
+
+
+            for (int i = 0; i < counter_n.Length; ++i)
+            {
+                counter_all = counter_all * counter_n[i];
+                //Console.WriteLine("counter_all= " + counter_all + " " + "counter_n= " + counter_n[i]);
+            }
+
+            return counter_all;
+        }
+
+        public static long Factorial_ver2(int n)
+        {
+
+            long counter_all = 1;
+
+            for (int i = 0; i < n; ++i)
+            {
+                counter_all = counter_all * (i + 1);
+            }
+
+            return counter_all;
+        }
+
+
+
+
+
+
+        static void Main(string[] args)
+        {
+
+
+
+
+            /**********************************************************************************************************************
+             * 
+             * Задание №1
+             * 
+             **********************************************************************************************************************/
+                //sortArr();
+                
+                int[] hhh = sortArr();
+                
+                foreach (int i in hhh){
+                    Console.WriteLine(i);
+                }
+           
+            /********************************************************************************************************************
+             * 
+             * Конец кода
+             * 
+             *******************************************************************************************************************/
+
+
+
+             /**********************************************************************************************************************
+             * 
+             * Задание №2
+             * 
+             **********************************************************************************************************************/
+             
+            int temp_search = Search_ver1(hhh);
+            if (temp_search == 12345004){
+                Console.WriteLine("Число не найдено");
+            } else Console.WriteLine("Найден под индексом: " + temp_search);
+            
+             /**********************************************************************************************************************
+             * 
+             * Конец кода
+             * 
+             **********************************************************************************************************************/
+
+
+
+             /**********************************************************************************************************************
+             * 
+             * Задание №3
+             * 
+             **********************************************************************************************************************/
+             
+            Console.WriteLine("Введите предложение: ");
+
+            string str_2 = Console.ReadLine();
+
+            string[] arrSTR = str_2.Split(' ');
+            //Console.WriteLine(arrSTR.Length);
+
+
+
+            for (int i = 0; i < arrSTR.Length; i++)
+            {
+                int s = 0;
+                string temp_i = arrSTR[i];
+
+                //Console.WriteLine("i= " + i + arrSTR[i]);
+                for (int k = 0; k < arrSTR.Length; k++)
+                {
+                    //Console.WriteLine("k= " + k + arrSTR[k]);
+
+                    string temp_k = arrSTR[k];
+                    if (temp_i == temp_k)
+                    {
+                        s++;
+                    }
+                }
+                if (s <= 1)
+                {
+                    Console.WriteLine("Найдены уникальные слова: " + arrSTR[i]);
+                }
+            }
+            
+
+             /**********************************************************************************************************************
+             * 
+             * Конец кода
+             * 
+             **********************************************************************************************************************/
+
+
+             /**********************************************************************************************************************
+             * 
+             * Задание №4
+             * 
+             **********************************************************************************************************************/
+
+
+
+            Console.WriteLine("Введите число для нахождения его факториала: ");
+            string str4;
+            int n;
+
+
+            do
+            {
+                str4 = Console.ReadLine();
+
+                if (checkNum(str4))
+                {
+                    n = int.Parse(str4);
+                    Console.WriteLine("Факториал версия 1: " + Factorial_ver1(n));
+                    Console.WriteLine("Факториал версия 2: " + Factorial_ver2(n));
+
+                }
+                else Console.WriteLine("Ошибка, введите, пожалуйста, целое число");
+            }
+
+            while (checkNum(str4) != true);
+
+
+
+
+             /**********************************************************************************************************************
+             * 
+             * Конец кода
+             * 
+             **********************************************************************************************************************/
+
+
+
+             /**********************************************************************************************************************
+             * 
+             * Задание №5
+             * 
+             **********************************************************************************************************************/
+
+
+
+
+
+
+           
+            Console.WriteLine("Haжмитe <Enter> для выхода . . . ");
+            Console.Read();
+        }
+    }
+}
+
